@@ -15,7 +15,7 @@ resource "google_container_cluster" "primary" {
 
   provisioner "local-exec" {
 
-    command = "gcloud container clusters get-credentials nodejs-demo --zone us-central1-c --project nodejs-demo-346304"
+    command = "gcloud container clusters get-credentials nodejs-demo-346304 --zone us-central1-c --project nodejs-demo-346304"
   }
 
   node_config {
