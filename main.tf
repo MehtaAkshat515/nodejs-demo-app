@@ -1,30 +1,21 @@
-# -------------------------------------------------------------*
-# Create and config Kubernetes cluster
-# -------------------------------------------------------------*
-# This will created the Kubernetes cluster and nodes in GCP
-resource "google_container_cluster" "primary" {
-  name               = "node-demo-k8s"  # cluster name
-   location          = "us-central1-c"
-  initial_node_count = 4               # number of node (VMs) for the cluster
 
-  # Google recommends custom service accounts that have cloud-platform 
-  # scope and permissions granted via IAM Roles.
-  # for this demo, we'll have no auth set up
-  # master_auth: The aut information for accessing the Kubernetes master.
+resource "google_container_cluster" "primary" {
+  name               = "nodejs-demo"  # cluster name
+   location          = "us-central1-c"
+  initial_node_count = 2               # number of node (VMs) for the cluster
+
   master_auth {
-    username = ""
-    password = ""
+    username = "akshatmehta40@gmail.com"
+    password = "AxatMehta@515"
 
     client_certificate_config {
       issue_client_certificate = false
     }
   }
 
-  # let's now configure kubectl to talk to the cluster
   provisioner "local-exec" {
-    # we will pas the project ID, zone and cluster name here
-    # nodejs-demo-319000 | us-central1-c | node-demo-k8s
-    command = "gcloud container clusters get-credentials node-demo-k8s --zone us-central1-c --project nodejs-demo-319000"
+
+    command = "gcloud container clusters get-credentials nodejs-demo --zone us-central1-c --project nodejs-demo-346304"
   }
 
   node_config {
@@ -42,7 +33,7 @@ resource "google_container_cluster" "primary" {
       disable-legacy-endpoints = "true"
     }
 
-    tags = ["node-demo-k8s"]
+    tags = ["nodejs-demo-nirma"]
   }
 
   timeouts {
@@ -52,11 +43,7 @@ resource "google_container_cluster" "primary" {
   }
 }
 
-# -------------------------------------------------------------*
-# Next, we create firewall rule to allow access to application
-# note: in our deploy.yml we set and know that
-# The range of valid ports in kubernetes is 30000-32767
-# -------------------------------------------------------------*
+
 resource "google_compute_firewall" "nodeports" {
   name    = "node-port-range"
   network = "default"
