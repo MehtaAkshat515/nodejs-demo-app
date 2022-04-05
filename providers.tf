@@ -8,6 +8,6 @@
 # corresponding provider blocks in configuration
 provider "google" {
   # version = "~> 3.77.0"
-  project = "nodejs-demo-319000"
+  project = "nodejs-demo"
   region  = "us-central1-c"
 }
