@@ -1,7 +1,7 @@
 FROM node
-LABEL authors="Yann Mulonda"
+LABEL authors="Akshat Mehta"
 
-# update dependencies and install curl
+
 RUN apt-get update && apt-get install -y \
     curl \
     && rm -rf /var/lib/apt/lists/*
@@ -19,7 +19,7 @@ WORKDIR /app
 # --more of a convenience when testing locally.
 COPY . .
 
-# update each dependency in package.json to the latest version
+
 RUN npm install -g npm-check-updates \
     ncu -u \
     npm install \
@@ -28,11 +28,10 @@ RUN npm install -g npm-check-updates \
     npm install babel-preset \
     npm install babel-preset-env
 
-# If you are building your code for production
-# npm ci will install dependecies from package-lock.json
+
 RUN npm ci --only=production
 
-# Bundle app source
+
 COPY . /app
 
 EXPOSE 30002
