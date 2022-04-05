@@ -136,7 +136,7 @@ jobs:
         run: |
           gcloud config set compute/region us-central1
           gcloud config set compute/zone us-central1-c
-          gcloud container clusters get-credentials node-demo-k8s
+          gcloud container clusters get-credentials nodejs-demo
           envsubst < deploy.yml
           envsubst < deploy.yml | kubectl apply -f -
           kubectl rollout status -w deployment/nodejs-demo-app
