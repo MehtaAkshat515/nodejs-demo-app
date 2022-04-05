@@ -1,9 +1,4 @@
-// *******************************************************************
-// "Routes" to forward the supported requests (and any information 
-// encoded in request URLs) to the appropriate controller functions.
-// *******************************************************************
 
-// import my GET API from the controller functions
 import { 
     home,
     getTodayDate,
