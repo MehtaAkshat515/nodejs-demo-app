@@ -1,9 +1,4 @@
-// ****************************************************************
-// set up GET API
-// Controller functions to get the requested data from the models, 
-// create an HTML page displaying the data, and return it to the 
-// user to view in the browser.
-// ****************************************************************
+
 import path from 'path';
 const __dirname = path.resolve();
 
@@ -41,33 +36,23 @@ export const getMonthsName = (req, res) => {
         12: 'December'
     });
 }
-// get list of people -- This can come from a database and what's defined in model.js
-// but for the purspuse of this demo, I'm going o juts type a couple of names
+
 export const getPeople = (req, res) => {
     res.json([
         {
-            FirstName: 'Yann',
-            LastName: 'Mulonda',
-            title: 'Software Engineer',
-            LinkedIn: 'https://www.linkedin.com/in/yannmjl/'
+            FirstName: 'Akshat',
+            LastName: 'Mehta',
+            title: 'Devops Engineer'
         },
         {
-            FirstName: 'Bernard',
-            LastName: 'Ng',
-            title: 'Software Developer',
-            LinkedIn: 'https://www.linkedin.com/in/bernard-ngandu/'
+            FirstName: 'Dishant',
+            LastName: 'Lodaliya',
+            title: 'Software Developer'
         },
         {
-            FirstName: 'Clerc',
-            LastName: 'Kapema',
-            title: 'Web Developer',
-            LinkedIn: 'https://www.linkedin.com/in/clerc-ngonga-b1253b174/'
-        },
-        {
-            FirstName: 'Gloire',
-            LastName: 'Kafwalubi',
-            title: 'Web Developer',
-            LinkedIn: 'https://www.linkedin.com/in/gloire-kafwalubi-3152871a0/'
+            FirstName: 'Jeet',
+            LastName: 'Sodha',
+            title: 'Web Developer'
         }
     ]);
 }
