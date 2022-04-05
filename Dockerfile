@@ -32,6 +32,7 @@ RUN npm install -g npm-check-updates \
 RUN npm ci --only=production
 
 
+
 COPY . /app
 
 EXPOSE 30002
