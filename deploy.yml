@@ -2,17 +2,17 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: nodejs-demo-app
+  name: nodejs-demo
   namespace: default
 spec:
   replicas: 4                     # this is number of pods
   selector:
     matchLabels:
-      app: nodejs-demo-app
+      app: nodejs-demo
   template:
     metadata:
       labels:
-        app: nodejs-demo-app
+        app: nodejs-demo
     spec:
       containers:
       - name: nodejs-demo-app
@@ -37,13 +37,13 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: nodejs-demo-app-entrypoint
+  name: nodejs-demo-entrypoint
   namespace: default
 spec:
 
   type: LoadBalancer
   selector:
-    app: nodejs-demo-app
+    app: nodejs-demo
   # The range of valid ports in kubernetes is 30000-32767
   ports:
 
