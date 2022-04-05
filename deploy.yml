@@ -1,10 +1,4 @@
-# check out all Kubernetes commands here:
-# https://kubernetes.io/docs/reference/kubectl/cheatsheet/
 
-# -----------------------------------------------------------*
-# implies the use of kubernetes 1.7
-# use apps/v1beta2 for kubernetes 1.8
-# -----------------------------------------------------------*
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -20,23 +14,13 @@ spec:
       labels:
         app: nodejs-demo-app
     spec:
-      # Kubernetes run docker pull pseudo/your-image:latest under the hood
-      # Image field in Kubernetes resources is simply the docker image to run.
       containers:
       - name: nodejs-demo-app
         # pulling image from my DockerHub
-        image: yanndocker/nodejs-demo:latest
-        # using if not present works well with images that has tag
-        # if you image is tag:lastest - use Always otherwise you
-        # wouldn't get the fresh version of your image
+        image: 166480307013/nodejs-demo:latest
+\
         imagePullPolicy: Always
-        # -----------------------------------------------------------*
-        # It is a good practice to declare resource requests and 
-        # limits for both memory and cpu for each container. 
-        # This helps to schedule the container to a node that has 
-        # available resources for your Pod, and also so that your 
-        # Pod does not use resources that other Pods needs
-        # -----------------------------------------------------------*
+
         resources:
           limits:
             memory: 64Mi
@@ -48,17 +32,7 @@ spec:
         ports:
         - containerPort: 30002
 
-    # -----------------------------------------------------------*
-    # If your image is hosted in a private docker hub repo, 
-    # you need to specify an image pull secret in the spec field.
-    # -----------------------------------------------------------*
-    # spec:
-    #   containers:
-    #   - name: app
-    #     image: pseudo/your-image:latest
-    #   imagePullSecrets:
-    #   - name: dockerhub-credential
-    # -----------------------------------------------------------*
+
 ---
 apiVersion: v1
 kind: Service
@@ -66,28 +40,13 @@ metadata:
   name: nodejs-demo-app-entrypoint
   namespace: default
 spec:
-  # -----------------------------------------------------------*
-  # if you're using service type NodePort. To access you app
-  # and test it locally you need to listen on local port.
-  # you can do that by forwarding a local port to Service target 
-  # port with name <my-service-name>
-  # e.g -- 
-  # kubectl port-forward service/nodejs-demo-app-entrypoint 3000:443
-  # -----------------------------------------------------------*
-  # type: NodePort
+
   type: LoadBalancer
   selector:
     app: nodejs-demo-app
   # The range of valid ports in kubernetes is 30000-32767
   ports:
-    # - protocol: TCP
-    #   port: 30002
-    #   targetPort: 30002
-    #   nodePort: 30002
-    # -----------------------------------------------------------*
-    # this block is for when you wanna use the type load balancer
-    # on your local computer or else where
-    # -----------------------------------------------------------*
+
     - name: http
       protocol: TCP
       port: 80             # this is service port 80
