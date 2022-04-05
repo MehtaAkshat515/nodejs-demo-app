@@ -18,7 +18,6 @@ spec:
       - name: nodejs-demo-app
         # pulling image from my DockerHub
         image: 166480307013/nodejs-demo:latest
-\
         imagePullPolicy: Always
 
         resources:
